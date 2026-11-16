@@ -89,13 +89,20 @@ class FluidRouteOverlayWidget extends StatelessWidget {
                   final double targetTextOpacity;
                   final Color currentColor;
 
-                  final targetRectVal = getTargetRect?.call() ??
-                      resolvedTargetRect ??
-                      Rect.fromCenter(
-                        center: Offset(screenWidth / 2, screenHeight * 0.8),
-                        width: startRect.width,
-                        height: startRect.height,
-                      );
+                  final targetRectVal = isPhase2
+                      ? (getTargetRect?.call() ??
+                          resolvedTargetRect ??
+                          Rect.fromCenter(
+                            center: Offset(screenWidth / 2, screenHeight * 0.8),
+                            width: startRect.width,
+                            height: startRect.height,
+                          ))
+                      : (resolvedTargetRect ??
+                          Rect.fromCenter(
+                            center: Offset(screenWidth / 2, screenHeight * 0.8),
+                            width: startRect.width,
+                            height: startRect.height,
+                          ));
 
                   final resolvedTargetColor = targetFillColor ?? fillColor;
 

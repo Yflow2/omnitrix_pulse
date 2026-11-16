@@ -1,3 +1,9 @@
+## 1.0.1
+
+* Fix: Guard against ancestor `RenderBox was not laid out: RenderFractionalTranslation ... hasSize` assertion error during route layout passes.
+* Fix: Prevent `Looking up a deactivated widget's ancestor is unsafe` by capturing `NavigatorState` prior to async animation and process delays.
+* Improved target rect stability and phase-aware geometry resolution during liquid transitions.
+
 ## 1.0.0
 
 * Initial release of `omni_transition`.

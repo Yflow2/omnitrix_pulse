@@ -12,9 +12,17 @@ class PulseGeometryUtils {
     if (context == null || !context.mounted) return null;
 
     final renderBox = context.findRenderObject() as RenderBox?;
-    if (renderBox != null && renderBox.hasSize && renderBox.size.width > 0 && renderBox.size.height > 0) {
-      final position = renderBox.localToGlobal(Offset.zero);
-      return position & renderBox.size;
+    if (renderBox != null &&
+        renderBox.attached &&
+        renderBox.hasSize &&
+        renderBox.size.width > 0 &&
+        renderBox.size.height > 0) {
+      try {
+        final position = renderBox.localToGlobal(Offset.zero);
+        return position & renderBox.size;
+      } catch (_) {
+        return null;
+      }
     }
     return null;
   }

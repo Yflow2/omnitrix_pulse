@@ -133,8 +133,8 @@ class OmniTransitionObserver extends NavigatorObserver {
       builder: (ctx) => FluidRouteOverlayWidget(
         startRect: fromRect,
         targetRect: toRect,
-        getTargetRect: () => toHero.getBoundingRect(),
-        getTargetChild: () => toHero.child,
+        getTargetRect: () => toHero.mounted ? toHero.getBoundingRect() : null,
+        getTargetChild: () => toHero.mounted ? toHero.child : null,
         config: config,
         fillColor: startColor,
         targetFillColor: targetColor,

@@ -52,7 +52,7 @@ class FluidRouteOverlayController extends GetxController with GetTickerProviderS
     );
 
     if (!isPop) {
-      resolvedTargetRect.value = targetRect ?? getTargetRect?.call();
+      resolvedTargetRect.value = targetRect;
     }
     runSequence();
   }

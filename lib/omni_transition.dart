@@ -86,6 +86,7 @@ class OmniTransition {
       fillColor: fillColor,
     );
 
+    final navigator = Navigator.of(context);
     final overlay = Overlay.of(context, rootOverlay: true);
     final resolvedColor = effectiveConfig.fillColor ??
         PulseGeometryUtils.resolveFillColor(context);
@@ -142,11 +143,13 @@ class OmniTransition {
             final destHero = PulseRegistry.instance.getHero(route, tag);
             destHero?.setFlying(true);
           }
-          Navigator.push<T>(context, route).then((val) {
-            if (!navFuture.isCompleted) {
-              navFuture.complete(val);
-            }
-          });
+          if (navigator.mounted) {
+            navigator.push<T>(route).then((val) {
+              if (!navFuture.isCompleted) {
+                navFuture.complete(val);
+              }
+            });
+          }
         },
         onComplete: cleanup,
       ),
@@ -178,9 +181,10 @@ class OmniTransition {
     Color? fillColor,
     Color? targetFillColor,
   }) async {
+    final navigator = Navigator.of(context);
     final currentRoute = ModalRoute.of(context);
     if (currentRoute == null) {
-      Navigator.pop(context, result);
+      if (navigator.mounted) navigator.pop(result);
       return;
     }
 
@@ -198,7 +202,7 @@ class OmniTransition {
     }
 
     if (currentHero == null || !currentHero.mounted) {
-      Navigator.pop(context, result);
+      if (navigator.mounted) navigator.pop(result);
       return;
     }
 
@@ -262,7 +266,9 @@ class OmniTransition {
             : null,
         onNavigate: () {
           // Screen is 100% covered! Pop the route now in the background
-          Navigator.pop(context, result);
+          if (navigator.mounted) {
+            navigator.pop(result);
+          }
         },
         onComplete: cleanup,
         isPop: true,
