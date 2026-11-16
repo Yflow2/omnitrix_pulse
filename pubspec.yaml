@@ -1,0 +1,28 @@
+name: omni_transition
+description: A high-performance, fluid liquid-morph page transition package for Flutter inspired by Hero animations, powered by GetX with 0 setState.
+version: 1.0.0
+homepage: https://github.com/Yflow2/omni_transition
+repository: https://github.com/Yflow2/omni_transition
+issue_tracker: https://github.com/Yflow2/omni_transition/issues
+topics:
+  - animation
+  - page-transition
+  - hero
+  - liquid-morph
+  - ui
+
+environment:
+  sdk: ^3.6.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.7.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
